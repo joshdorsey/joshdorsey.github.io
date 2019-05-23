@@ -1,0 +1,118 @@
+<html>
+<head>
+    <title>Conway's Game of Life</title>
+    <script type="text/javascript" src="jquery.js"></script>
+    <style>
+        body {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            -o-user-select: none;
+            font-family: helvetica;
+        }
+
+        #gContainer {
+            position: relative;
+            display: inline-block;
+            margin-right: 1px;
+            padding: 5px;
+            padding-bottom: 10px;
+            border: 1px solid #888;
+            box-shadow: 0 0 2px 2px #ccc;
+        }
+
+        #container {
+            line-height: 69%;
+            display: inline-block;
+            padding: 1px 0;
+            padding-right: 1px;
+            margin: 0 auto;
+            border: 1px dashed #444;
+        }
+        
+        #cell {
+            width: 19px;
+            height: 19px;
+            border: 1px solid #000;
+            float: left;
+            margin:0;
+            margin-left: 1px;
+        }
+        
+        div.true {
+            background-color: #000;
+        }
+        
+        div.false {
+            background-color: #fff;
+        }
+
+        hr {
+            background-color: #555;
+            width: 70%;
+        }
+
+        #resizeButton img {
+            width: 20px;
+            float: right;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        #resizePanel {
+            position: absolute;
+            background-color: #fff;
+            right: 5px;
+            top: 5px;
+            width: 150px;
+            height: 80px;
+            border: 1px solid black;
+            box-shadow: 0 4px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #resizePanel input {
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        #memoryAmount {
+            display: inline-block;
+            width: 100px;
+            margin-top: 3px;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <div id="gContainer">
+            <a id="resizeButton"><img src="img/resize.png"></a>
+            <div id="resizePanel">
+                <center style="margin: 10px 0">
+                    <input type="text" id="widthField" size="2">
+                    <input type="text" id="heightField" size="2">
+                </center>
+                <center>
+                    <input type="button" value="set" onclick="setGridDimensions()">
+                </center>
+            </div>
+            <center>
+                <h1>Conway's Game of Life</h1>
+                <hr noshade>
+            </center>
+            <div id="container">
+            </div>
+            <center style="margin-top: 5px">
+                <input type="button" id="randomStartButton" value="random start" onclick="grid.randomStart(rsPercent)">
+                <input type="button" id="advanceButton" value="advance" onclick="grid.advance()">
+                <input type="button" id="playButton" value="play" onclick="play()">
+                <input type="button" id="stopButton" value="stop" onclick="stop()">
+                <input type="button" id="clearButton" value="clear" onclick="grid.clear(); stop()">
+                <div id="memoryAmount">4096 bytes</div>
+            </center>
+        </div>
+    </center>
+    <script type="text/javascript" src="conway.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="120"
+   height="120"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Ringed Add Server_on.svg">
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs14" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview12"
+     showgrid="false"
+     inkscape:zoom="5.5625733"
+     inkscape:cx="77.538228"
+     inkscape:cy="59.551196"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <g
+     transform="translate(10 10)"
+     id="g4">
+    <path
+       fill="#FBFBFB"
+       d="M110 50c0 33.137-26.863 60-60 60s-60-26.863-60-60 26.863-60 60-60 60 26.863 60 60zm-60-57.5c-31.756 0-57.5 25.744-57.5 57.5s25.744 57.5 57.5 57.5 57.5-25.744 57.5-57.5-25.744-57.5-57.5-57.5z"
+       id="path6" />
+    <circle
+       fill="#FBFBFB"
+       cx="50"
+       cy="50"
+       r="50"
+       id="circle8" />
+  </g>
+  <rect
+     style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect4144"
+     width="64.352608"
+     height="17.2582"
+     x="27.823696"
+     y="51.370899"
+     rx="8.1355934"
+     ry="8.1355934" />
+  <g
+     id="g4146"
+     transform="translate(10 10)">
+    <path
+       id="path4148"
+       d="M110 50c0 33.137-26.863 60-60 60s-60-26.863-60-60 26.863-60 60-60 60 26.863 60 60zm-60-57.5c-31.756 0-57.5 25.744-57.5 57.5s25.744 57.5 57.5 57.5 57.5-25.744 57.5-57.5-25.744-57.5-57.5-57.5z"
+       fill="#FBFBFB"
+       style="fill:#eba601;fill-opacity:1" />
+    <circle
+       id="circle4150"
+       r="50"
+       cy="50"
+       cx="50"
+       fill="#FBFBFB"
+       style="fill:#eba601;fill-opacity:1" />
+  </g>
+  <rect
+     ry="8.1355934"
+     rx="8.1355934"
+     y="51.370899"
+     x="27.823696"
+     height="17.2582"
+     width="64.352608"
+     id="rect4152"
+     style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1" />
+  <rect
+     style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1"
+     id="rect4154"
+     width="64.352608"
+     height="17.2582"
+     x="-92.1763"
+     y="51.370899"
+     rx="8.1355934"
+     ry="8.1355934"
+     transform="matrix(0,-1,1,0,0,0)" />
+</svg>

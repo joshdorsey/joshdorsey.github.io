@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title>
+			Redirect
+		</title>
+		<script type="text/javascript">
+			// If the url ends in "index.html"
+			var loc = window.location.toString();
+			if(loc.substr(loc.length-10, loc.length) == "index.html"){
+				var origLocation = loc;
+				origLocation = origLocation.substring(0, origLocation.length-11);
+				window.location.replace(origLocation + "/4d-tic-tac-toe");
+			} else {
+				window.location.replace(loc+"/4d-tic-tac-toe");
+			}
+		</script>
+	</head>
+</html>

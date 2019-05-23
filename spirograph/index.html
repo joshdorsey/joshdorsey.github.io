@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>P5 Spirograph</title>
+	<style>
+		canvas {
+		   position: absolute;
+		   left: 0;
+		   top: 0;
+		}
+
+		#controlPanelHolder {
+			color: white;
+			font-family: sans-serif;
+			font-size: 15pt;
+			position: absolute;
+			left: 50%;
+		}
+
+		#controlPanel {
+			box-sizing: border-box;
+			padding: 10px;
+			z-index: 10;
+			width: 600px;
+			height: 420px;
+			border: 1px solid white;
+			background-color: black;
+			position: relative;
+			left: -50%;
+			border-radius: 10px;
+			-o-border-radius: 10px;
+			-moz-border-radius: 10px;
+			-webkit-border-radius: 10px;
+		}
+
+		#confirmationSection {
+			width: 578px;
+			position: absolute;
+			margin: 0 auto;
+			border-top: 1px dashed white;
+			bottom: 10px;
+		}
+
+		#confirmationSection * {
+			display: inline-block;
+			float: right;
+			margin-top: 10px;
+			margin-right: 10px;
+			width: 100px;
+		}
+
+		#pointRadiusField {
+			width: 100px;
+		}
+
+		#ringsField {
+			width: 50px;
+			margin-right: 130px;
+		}
+
+		#rotationOffsetField {
+			width: 50px;
+			margin-right: 50px;
+		}
+
+		#pointDistSelect {
+			width: 90px;
+		}
+
+		#timeStepField {
+			width: 110px;
+		}
+
+		#pointRadiusField {
+			width: 90px;
+		}
+
+		#iterationsField {
+			width: 110px;
+		}
+
+		#stripeField {
+			margin-right: 160px;
+		}
+
+		.sectionHeader {
+			width: 100%;
+			border-bottom: 1px dashed white;
+			font-size: 18pt;
+			margin-bottom: 10px;
+			margin-top: 10px;
+		}
+
+		.field {
+			display: block;
+			vertical-align: middle;
+			width: 260px;
+			margin-right: 10px;
+			margin-left: 10px;
+			height: 25px;
+			float: left;
+		}
+
+		.field input {
+			float: right;
+		}
+
+		.field span {
+			float: right;
+			margin-right: 5px;
+		}
+	</style>
+</head>
+<body>
+	<div id="controlPanelHolder">
+		<div id="controlPanel">
+		<!-- The size section doesn't work for now
+			<div class="sectionHeader">
+				Sizing
+			</div>
+			<div class="field" title="Leave blank to fill screen">
+				Width: <input disabled id="widthField" type="text">
+			</div>
+			<div class="field" title="Leave blank to fill screen">
+				Height: <input disabled id="heightField"  type="text">
+			</div>
+			-->
+			<div class="sectionHeader">
+				Pacing
+			</div>
+			<div class="field" title="How much the curve is advanced between each draw">
+				Timestep:
+				<input id="timeStepField" type="range" value="100" min="1" max="1000">
+				<span id="timeStepLabel">100</span>
+			</div><br>
+
+			<div class="sectionHeader">
+				Drawing
+			</div>
+			<div class="field" title="The radius (in pixels) of individual points">
+				Point Radius:
+				<input id="pointRadiusField" type="range" value="0.5" min="0.5" max="100.0">
+				<span id="pointRadiusLabel">0.5</span>
+			</div>
+			<div class="field" title="The radius of the spirogram overall">
+				Radius:
+				<input id="radiusField" type="range" value="0" min="0" max="3000">
+				<span id="radiusLabel">Auto</span>
+			</div>
+			<div class="field" title="How many iterations (points) to draw on each curve">
+				Iterations:
+				<input id="iterationsField" type="range" value="400" min="1" max="1500">
+				<span id="iterationsLabel">400</span>
+			</div>
+			<div class="field" title="How opaque each curve should be drawn">
+				Opacity:
+				<input id="opacityField" type="range" value="0.5" min="0.01" max="1" step="0.01">
+				<span id="opacityLabel">0.50</span>
+			</div>
+			<div class="field" title="How many colors are involved in the rendering">
+				Colors:
+				<select id="colorSelect">
+					<option> Grayscale
+					<option> Monochromatic
+					<option> Dichromatic
+					<option> Trichromatic
+				</select>
+			</div><br><br><br>
+
+			<div class="sectionHeader">
+				Shape
+			</div>
+			<div class="field" title="How many ring shapes will be in the spirogram">
+				Rings:
+				<input id="ringsField" type="number" step="0.1" value="5">
+			</div>
+			<div class="field" title="The rotation offset expressed as a factor of &pi;">
+				Rotation Offset:
+				<input id="rotationOffsetField" type="number" step="0.5" value="2">
+			</div>
+			<div class="field" title="How the points are distributed along each curve">
+				Point Distribution:
+				<select id="pointDistSelect">
+					<option> Uniform
+					<option> Organic Random
+					<option> Fuzzy Random
+				</select>
+			</div>
+			<div class="field" title="">
+				Stripes:
+				<input type="checkbox" id="stripeField">
+			</div>
+			<div id="confirmationSection">
+				<input type="button" id="startButton" value="start" title="Start drawing">
+				<input type="button" disabled value="randomize" title="Coming soon">
+			</div>
+		</div>
+	</div>
+	<script src="p5.min.js"></script>
+	<script src="sketch.js"></script>
+	<script src="interface.js"></script>
+</body>
+</html>

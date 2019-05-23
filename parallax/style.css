@@ -1,0 +1,115 @@
+html, body {
+	top: 0;
+	left: 0;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	font-family: "Lato", sans-serif;
+}
+
+.layer {
+	position: absolute;
+	width: 1920px;
+	height: 1080px;
+}
+
+#wall img {
+	position: absolute;
+	right: -90px;
+	bottom: -90px;
+	width: 2100px;
+}
+
+#couch img {
+	position: absolute;
+	right: -290px;
+	bottom: -190px;
+	width: 2500px;
+}
+
+#flowers img {
+	position: absolute;
+	left: -190px;
+	bottom: -160px;
+	width: 2300px;
+}
+
+#foreground img {
+	position: absolute;
+	right: -480px;
+	bottom: -230px;
+	width: 2100px;
+}
+
+#container {
+	height: 100px;
+	width: 100%;
+}
+
+#positionSlider {
+	position: fixed;
+	bottom: 10px;
+	width: 100%;
+}
+
+#info {
+	background-color: #fff;
+	font-family: sans-serif;
+	box-sizing: border-box;
+	color: #555;
+	padding: 10px;
+	position: fixed;
+	bottom: 5px;
+	left: 5px;
+	width: 270px;
+	height: 131px;
+	border: 2px solid #aaa;
+	overflow: hidden;
+	border-radius: 17px;
+	-moz-border-radius: 17px;
+	-webkit-border-radius: 17px;
+	-o-border-radius: 17px;
+	line-height: 18px; /* cross-browser consistency */
+}
+
+#info img {
+	float: left;
+	display: block;
+	margin: 4px;
+	margin-left: 1px;
+	margin-top: 1px;
+}
+
+#content {
+	position: absolute;
+	z-index: 2;
+	font-size: 24pt;
+	color: #eee;
+	width: 800px;
+	height: 800px;
+	margin-top: 200px;
+	overflow-y: scroll;
+	border: 1px solid #bbb;
+	box-shadow: 0 5px 2px 0px #aaa;
+	transform: translate(0, 0, 0);
+}
+
+#content::-webkit-scrollbar {
+	display: none;
+}
+
+.header {
+	font-size: 36pt;
+	color: #fff;
+	text-align: center;
+	width: auto;
+	margin-bottom: 10px;
+	border-bottom: 1px dashed #bbb;
+}
+
+.body {
+	font-size: 14pt;
+	width: 95%;
+	text-indent: 2.5em;
+	margin: 0 auto;
+}

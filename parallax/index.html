@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Parallax Test</title>
+		<link rel="stylesheet" href="style.css">
+		<link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="js/parallax.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<div class="layer" id="wall">
+				<img src="img/wall.png">
+			</div>
+			<div class="layer" id="couch">
+				<img src="img/couch.png">
+			</div>
+			<!--<div id="content">
+				<div class="header">
+					Lorem Ipsum
+				</div>
+				<div class="body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vestibulum enim sem, sit amet facilisis diam blandit id. Etiam posuere tortor nec sem semper elementum. Sed ultricies, ligula id auctor aliquam, nulla nibh hendrerit ante, sit amet sodales ex dui quis est. Nulla at neque non urna rhoncus lobortis non eu mauris. Quisque id venenatis est, sit amet congue mauris. In facilisis bibendum odio sit amet congue. Mauris mi risus, tincidunt ut enim tristique, placerat pharetra tortor. Nulla pulvinar accumsan est, eget egestas augue commodo ac.</p>
+
+					<p>Morbi luctus a orci a tincidunt. Duis eu consectetur odio. Suspendisse ultricies urna eu efficitur viverra. Cras velit metus, vehicula non placerat eu, hendrerit non justo. Nulla tempus consequat purus nec sollicitudin. Donec dapibus porta semper. Vestibulum a nunc sapien. Etiam condimentum eros at ligula porttitor, sed varius mauris convallis. Quisque bibendum semper ipsum, et rhoncus turpis mattis a. Aenean placerat maximus felis, at congue felis venenatis vel. Ut vel suscipit lacus, eget ullamcorper arcu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Ut dignissim tempor risus quis dictum. Morbi et feugiat elit.</p>
+
+					<p>Aliquam varius nec dui eleifend fermentum. Aenean sodales nisi ac sem commodo, in iaculis lacus suscipit. Morbi in urna sed ex sodales ultrices vel ac elit. Aliquam faucibus justo ut nunc faucibus, vel dignissim ipsum ornare. Morbi facilisis posuere leo at blandit. In commodo tellus vitae tincidunt congue. Curabitur in hendrerit erat. Vestibulum diam massa, tristique nec sapien ac, blandit porta sem.</p>
+
+					<p>Integer dignissim dui quis lacus blandit auctor vel eget velit. Proin interdum, nisl et interdum feugiat, elit libero interdum nisi, vitae congue massa magna a ligula. Suspendisse elementum eros eu nulla consectetur, sed suscipit risus pulvinar. Phasellus dolor nulla, gravida dapibus pretium vel, tincidunt vel enim. Nullam finibus aliquet odio et feugiat. Nam sagittis dapibus dui vitae blandit. Mauris mattis congue ligula. Aenean ut tellus imperdiet, aliquam ante eu, ornare velit.</p>
+
+					<p>Aliquam eget velit nec justo scelerisque convallis vel eget quam. Duis a consequat mi, ut pellentesque neque. Proin vulputate porttitor ipsum, ut gravida neque aliquet eu. Vestibulum in vehicula augue. Nullam finibus viverra rutrum. Etiam tempor velit nec congue fringilla. Nam egestas, neque nec suscipit gravida, mi est dapibus nibh, vel rutrum erat eros ac enim.</p>
+
+					<p>Integer dignissim dui quis lacus blandit auctor vel eget velit. Proin interdum, nisl et interdum feugiat, elit libero interdum nisi, vitae congue massa magna a ligula. Suspendisse elementum eros eu nulla consectetur, sed suscipit risus pulvinar. Phasellus dolor nulla, gravida dapibus pretium vel, tincidunt vel enim. Nullam finibus aliquet odio et feugiat. Nam sagittis dapibus dui vitae blandit. Mauris mattis congue ligula. Aenean ut tellus imperdiet, aliquam ante eu, ornare velit.</p>
+
+					<p>Aliquam eget velit nec justo scelerisque convallis vel eget quam. Duis a consequat mi, ut pellentesque neque. Proin vulputate porttitor ipsum, ut gravida neque aliquet eu. Vestibulum in vehicula augue. Nullam finibus viverra rutrum. Etiam tempor velit nec congue fringilla. Nam egestas, neque nec suscipit gravida, mi est dapibus nibh, vel rutrum erat eros ac enim.</p>
+				</div>
+			</div>-->
+			<div class="layer" id="flowers">
+				<img src="img/flowers.png">
+			</div>
+			<div class="layer" id="foreground">
+				<img src="img/foreground.png">
+			</div>
+		</div>
+		<div id="info">
+			<!-- Source: http://commons.wikimedia.org/wiki/File:Infobox_info_icon.svg -->
+			<img src="img/info_icon.png" width="28px" height="28px">
+			This is a parallax demonstration.  <b>Move the mouse</b> along the X direction to move left and right in the scene, and along the Y direction to move up and down.
+		</div>
+		<script type="text/javascript">
+			// Register parallax objects
+			objects.push(object("#wall", 0, 17));
+			objects.push(object("#couch", 0, 13));
+			objects.push(object("#flowers", 0, 9));
+			objects.push(object("#content", 0, 4));
+			objects.push(object("#foreground", 0, 2));
+			$(document).ready(function(){
+				updateObjects({clientX: 0, clientY: 0}); // Trick the function into thinking it's got an event so it doesn't throw an error when run to adjust the images initially.
+			});
+		</script>
+	</body>
+</html>

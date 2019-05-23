@@ -1,0 +1,103 @@
+﻿<html>
+	<head>
+		<title>4D Tic-Tac-Toe</title>
+		<link rel="stylesheet" href="main.css">
+		<script type="text/javascript">
+		WebFontConfig = {
+			google: {families: ['Lato::latin' ]}
+		};
+		(function() {
+			var wf = document.createElement('script');
+			wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+		  	'://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+			wf.type = 'text/javascript';
+			wf.async = 'true';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(wf, s);
+		})();
+  		</script>
+		<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery.transit.min.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		 <!--[if lt IE 9]> 
+ 		<script>document.createElement("board");</script>
+ 		<script>document.createElement("cell");</script>
+ 		<![endif]-->
+ 		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body>
+		<div id="title">
+			4D Tic-Tac-Toe!
+		</div>
+		<div id="advice">
+			Use the LMB to take a turn in any cell, or tap if you're on a phone.  You can collapse a cube to get a better perspective by using the checkbox next to its label.  To win, you must get a win on all four dimensions (a 1D win would be a regular line, a 2D one a diagonal, 3D across boards and 4D across cubes).
+		</div>
+		<div id="fieldContainer">
+			<div class="cube"> <!-- Labels on the left -->
+				<div class="empty"></div>
+				<div class="layerLabel">Layer 1</div>
+				<div class="layerLabel">Layer 2</div>
+				<div class="layerLabel">Layer 3</div>
+			</div>
+			<div class="cube">
+				<div class="cubeLabel">Cube 1 <input type="checkbox" onchange="toggleCollapsed(1)"></div>
+				<div class="layer">
+					<board id="1.1"></board>
+				</div>
+				<div class="layer">
+					<board id="1.2"></board>
+				</div>
+				<div class="layer">
+					<board id="1.3"></board>
+				</div>
+			</div>
+			<div class="cube">
+				<div class="cubeLabel">Cube 2 <input type="checkbox" onchange="toggleCollapsed(2)"></div>
+				<div class="layer">
+					<board id="2.1"></board>
+				</div>
+				<div class="layer">
+					<board id="2.2"></board>
+				</div>
+				<div class="layer">
+					<board id="2.3"></board>
+				</div>
+			</div>
+			<div class="cube">
+				<div class="cubeLabel">Cube 3 <input type="checkbox" onchange="toggleCollapsed(3)"></div>
+				<div class="layer">
+					<board id="3.1"></board>
+				</div>
+				<div class="layer">
+					<board id="3.2">
+
+					</board>
+				</div>
+				<div class="layer">
+					<board id="3.3"></board>
+				</div>
+			</div>
+			<div id="winOverlay" style="display: none;">X Wins!</div>
+		</div>
+		<div id="buttonPanel">
+			<div class="winLabel" id="X">
+				X: <div class="indicatorBox" id="x1d">1</div>
+				<div class="indicatorBox" id="x2d">2</div>
+				<div class="indicatorBox" id="x3d">3</div>
+				<div class="indicatorBox" id="x4d">4</div>
+			</div>
+			<div class="winLabel" id="O">
+				O: <div class="indicatorBox" id="o1d">1</div>
+				<div class="indicatorBox" id="o2d">2</div>
+				<div class="indicatorBox" id="o3d">3</div>
+				<div class="indicatorBox" id="o4d">4</div>
+			</div>
+			<div id="turnLabel">X's Turn</div><br>
+			<input type="button" onclick="undo()" value="Undo">
+			<input type="button" onclick="restart()" value="Restart Match">
+		</div>
+		<div id="debugOutputToggle" class="hidden">&raquo;</div>
+		<pre id="debugOutput" class="hidden">
+		</pre>
+	</body>
+</html>

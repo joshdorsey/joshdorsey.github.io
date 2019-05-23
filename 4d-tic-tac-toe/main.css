@@ -1,0 +1,422 @@
+﻿body {
+	font-family: "Lato", sans-serif;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	cursor: default;
+	padding: 0;
+	padding-bottom: 10px;
+	margin: 0;
+}
+
+board {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+cell {
+	display: block;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+@media (min-width: 450px){
+	hr {
+		width: 25%;
+		color: #bbb;
+		border-color: #bbb; /* same as above */
+	}
+
+	#title {
+		font-size: 36pt;
+		text-align: center;
+		width: 400px;
+		margin: 0 auto;
+		margin-top: 20px;
+	}
+
+	#advice {
+		font-size: 12pt;
+		text-align: center;
+		width: 600px;
+		margin: 0 auto;
+		margin-top: 35px;
+		margin-bottom: 15px;
+		color: #444;
+	}
+
+	#fieldContainer {
+		position: relative;
+		border-top: 1px solid black;
+		width: 422px;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 15px;
+		padding-top: 5px;
+	}
+
+	#buttonPanel {
+		font-weight: bold;
+		text-align: center;
+		width: 550px;
+		margin: 5px auto;
+		padding: 5px 0;
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+	}
+
+	.cube {
+		display: inline-block;
+		vertical-align: top;
+		height: 330px;
+	}
+
+	.layer {
+		margin-bottom: 5px;
+		margin-left: 10px;
+		width: 90px;
+		height: 90px;
+		padding: 0;
+		border: 1px dashed black;
+	}
+
+	.layerLabel:first-of-type {
+		margin-top: 10px;
+	}
+
+	.layerLabel {
+		margin-left: 10px;
+		margin-bottom: 10px;
+		margin-top: 10px;
+		padding-top: 34px;
+		width: 80px;
+		text-align: center;
+		height: 54px;
+		border-right: 1px solid black;
+	}
+
+	.cubeLabel {
+		margin-bottom: 5px;
+		margin-left: 10px;
+		width: 90px;
+		text-align: center;
+		height: 25px;
+		padding: 5px 0 0 0;
+		border-bottom: 1px solid black;
+	}
+
+	.empty {
+		margin-bottom: 5px;
+		margin-left: 10px;
+		width: 55px;
+		height: 25px;
+	}
+
+	board {
+		overflow: hidden;
+		white-space: nowrap;
+		padding-left: 1px;
+		padding-top: 1px;
+	}
+
+	cell {
+		display: inline-block;
+		white-space: normal;
+		width: 29px;
+		height: 29px;
+		border-right: 1px solid #777;
+		border-bottom: 1px solid #777;
+	}
+
+	cell.bottom {
+		display: inline-block;
+		white-space: normal;
+		width: 29px;
+		height: 29px;
+		border-right: 1px solid #777;
+		border-bottom: none;
+	}
+
+	#debugOutput.hidden {
+		left: -400px;
+	}
+
+	#debugOutput {
+		background-color: white;
+		box-sizing: border-box;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		width: 400px;
+		margin: 0;
+		margin-left: auto;
+		margin-right: auto;
+		padding-left: 10px;
+		padding-top: 10px;
+		max-height: 100%;
+		overflow-x: hidden;
+		font-family: "Courier New", monospace;
+		user-select: text;
+		-webkit-user-select: text;
+		-moz-user-select: text;
+		-o-user-select: text;
+		border-right: 1px solid black;
+	}
+
+	#debugOutputToggle.hidden {
+		cursor: pointer;
+		position: fixed;
+		width: 40px;
+		height: 34px;
+		font-size: 20pt;
+		text-align: center;
+		left: 0px;
+		top: 100px;
+		border: 1px solid black;
+		border-left: none;
+		background-color: white;
+	}
+
+	#debugOutputToggle {
+		cursor: pointer;
+		position: fixed;
+		width: 40px;
+		height: 34px;
+		font-size: 20pt;
+		text-align: center;
+		left: 400px;
+		top: 100px;
+		border: 1px solid black;
+		border-left: none;
+		background-color: white;
+	}
+
+	#winOverlay {
+		position: absolute;
+		background-color: rgba(255, 255, 255, 0.8);
+		margin: 0;
+		margin-top: 25%;
+		padding: 0;
+		z-index: 4;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: auto/2;
+		font-size: 550%;
+		text-align: center;
+		box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.8);
+		-webkit-box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.8);
+		-moz-box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.8);
+		-o-box-shadow: 0 0 10px 10px rgba(255, 255, 255, 0.8);
+	}
+}
+
+@media (max-width: 450px){
+	hr {
+		width: 40%;
+		color: #bbb;
+		border-color: #bbb; /* same as above */
+	}
+
+	#title {
+		font-size: 32pt;
+		text-align: center;
+		width: 95%;
+		margin: 0 auto;
+		margin-top: 1em;
+	}
+
+	#advice {
+		font-size: 12pt;
+		text-align: center;
+		width: 75%;
+		margin: 0 auto;
+		margin-top: 25px;
+		margin-bottom: 10px;
+		color: #444;
+	}
+
+	#fieldContainer {
+		box-sizing: border-box;
+		border-top: 1px solid black;
+		position: relative;
+		width: 95%;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 15px;
+		padding-top: 5px;
+	}
+
+	#buttonPanel {
+		width: 95%;
+		margin: 5px auto;
+		padding: 5px 0;
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		font-weight: bold;
+		text-align: center;
+	}
+
+	.layerLabel {
+		display: none;
+	}
+
+	.cube {
+		box-sizing: border-box;
+		display: inline-block;
+		vertical-align: top;
+		width: 32%;
+	}
+
+	.cube:first-of-type {
+		display: none;
+	}
+
+	.layer {
+		box-sizing: border-box;
+		width: 99%;
+		padding: 0;
+		margin-bottom: 4px;
+		border: 1px dashed black;
+		overflow: hidden;
+	}
+
+	.layerLabel:first-of-type {
+		margin-top: 10px;
+	}
+
+	.layerLabel {
+		display: none;
+	}
+
+	.cubeLabel {
+		margin-bottom: 5px;
+		text-align: center;
+		height: 25px;
+		border-bottom: 1px solid black;
+	}
+
+	.empty {
+		margin-bottom: 5px;
+		margin-left: 10px;
+		width: 55px;
+		height: 25px;
+	}
+
+	board {
+		overflow: hidden;
+		white-space: nowrap;
+		width: 103%;
+	}
+
+	cell {
+		box-sizing: border-box;
+		display: inline-block;
+		white-space: normal;
+		width: 33%;
+		padding-top: 33%;
+		border-right: 1px solid #777;
+		border-bottom: 1px solid #777;
+	}
+
+	cell.bottom {
+		border-bottom: none;
+	}
+
+	#debugOutput.hidden {
+		display: none;
+	}
+
+	#debugOutput {
+		display: none;
+	}
+
+	#debugOutputToggle.hidden {
+		display: none;
+	}
+
+	#debugOutputToggle {
+		display: none;
+	}
+
+	#winOverlay {
+		position: absolute;
+		font-size: 48pt;
+		top: 40%;
+		box-sizing: border-box;
+		text-align: center;
+		width: 80%;
+		left: 50%;
+		margin-left: -40%;
+		background-color: rgba(255, 255, 255, 0.8);
+		box-shadow: 0 0 2rem 2rem rgba(255, 255, 255, 0.8);
+		-webkit-box-shadow: 0 0 2rem 2rem rgba(255, 255, 255, 0.8);
+		-moz-box-shadow: 0 0 2rem 2rem rgba(255, 255, 255, 0.8);
+		-o-box-shadow: 0 0 2rem 2rem rgba(255, 255, 255, 0.8);
+	}
+}
+
+#turnLabel {
+	display: inline-block;
+	width: 100px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+input[type=button] {
+	outline: 0;
+	height: 30px;
+	background-color: white;
+	border: 1px solid black;
+}
+
+input[type=button]:hover {
+	background-color: #ddd;
+}
+
+input[type=button]:active {
+	background-color: #aaa;
+	color: #fff;
+	box-shadow: 0 0 1px 1px #dbdbdb;
+}
+
+input[type=checkbox] {
+	outline: 0;
+	width: 15px;
+	height: 15px;
+	vertical-align: center;
+	background: white;
+	border: 1px solid black;
+}
+
+.winLabel {
+	display: inline-block;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.winLabel#Xs {
+	background-color: #0f0;
+	box-shadow: 0 0 4px 4px #0f0;
+	-webkit-box-shadow: 0 0 4px 4px #0f0;
+	-moz-box-shadow: 0 0 4px 4px #0f0;
+	-o-box-shadow: 0 0 4px 4px #0f0;
+}
+
+.indicatorBox {
+	display: inline-block;
+	margin: 0;
+	width: 22px;
+	height: 21px;
+	text-align: center;
+	border: 1px solid black;
+}
+
+.indicatorBox.full {
+	background-color: #000;
+	color: #fff;
+}

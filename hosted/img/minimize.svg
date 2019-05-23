@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="100"
+   height="100"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="Minimize.svg">
+  <metadata
+     id="metadata14">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview10"
+     showgrid="false"
+     inkscape:zoom="6.675088"
+     inkscape:cx="55.096019"
+     inkscape:cy="45.477704"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g4" />
+  <g
+     id="g4">
+    <circle
+       cx="50"
+       cy="50"
+       r="50"
+       id="circle6"
+       fill="#4D4D4D" />
+    <path
+       d="m 79.05325,55.303286 c -1.356937,1.356938 -3.232185,2.196981 -5.3033,2.197688 l -47.500606,-0.0014 c -4.142231,0 -7.500281,-3.35805 -7.499574,-7.499575 0,-4.142232 3.35805,-7.500282 7.499574,-7.499575 l 47.500606,-0.0014 c 4.142938,7.08e-4 7.500281,3.358051 7.500281,7.500281 0,2.071824 -0.840043,3.94707 -2.196981,5.304008 z"
+       id="path8"
+       inkscape:connector-curvature="0"
+       style="fill:#fbfbfb"
+       sodipodi:nodetypes="scccccss" />
+  </g>
+</svg>
