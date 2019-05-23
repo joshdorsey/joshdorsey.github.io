@@ -1,0 +1,282 @@
+<!doctype html5>
+<html>
+<head>
+	<title>Mandelbrot Implementation in Erlang</title>
+	<meta charset="UTF-8"/>
+	
+	<link rel="stylesheet" href="css/style.css"/>
+	
+	<!-- highlight.js stuff -->
+	<link rel="stylesheet" href="css/mono-blue.css"/>
+	<script type="text/javascript" src="js/highlight.pack.js"></script>
+	
+	<!-- lightbox stuff -->
+	<script async type="text/javascript" src="js/lightbox-plus-jquery.min.js"></script>
+	<link rel="stylesheet" href="css/lightbox.min.css"/>
+	
+	<script>
+		// https://github.com/felixhagspiel/jsOnlyLightbox/issues/12
+		var lightboxAsync = window.setInterval(function(){
+			console.log("Trying to initialize lightbox.");
+			if(typeof window.lightbox !== 'undefined') {
+				lightbox.option({
+					"maxWidth": 800,
+					"maxHeight": 800,
+					"fadeDuration": 100,
+					"resizeDuration": 0,
+					"imageFadeDuration": 0
+				});
+				
+				window.clearInterval(lightboxAsync);
+			}
+		}, 50);
+		
+		function fixIndents() {
+			function fixIndent(block) {
+				const globalIndent = parseInt(block.parentNode.dataset.indent) || 0;
+				
+				const notEmpty = line => line.length !== 0;
+				const getWhitespace = line => (/^\s*/g).exec(line)[0].length;
+				
+				let lines = block.textContent
+					.split("\n")
+					.map(line => line.replace(/\t/g, "    "));
+				
+				if (lines.length === 0) {
+					return;
+				}
+				
+				let firstLine = -1;
+				for(let i = 0; i < lines.length; i++) {
+					if (lines[i].trim().length !== 0) {
+						firstLine = i;
+						break;
+					}
+				}
+				
+				let lastLine = lines.length;
+				for(let i = lines.length-1; i >= 0; i--) {
+					if (lines[i].trim().length !== 0) {
+						lastLine = i;
+						break;
+					}
+				}
+				
+				lines = lines.slice(firstLine, lastLine+1);
+				
+				const minSpacing = Math.min(...lines
+					.filter(notEmpty)
+					.map(getWhitespace));
+				
+				block.textContent = lines
+					.map(line => " ".repeat(globalIndent) + line.substring(minSpacing))
+					.join("\n");
+				
+				return block;
+			}
+			
+			const startMark = performance.mark("indent-start");
+			[...document.querySelectorAll("pre.fix-indent > code:only-child")]
+				.map(fixIndent)
+				.forEach(hljs.highlightBlock);
+			performance.measure("Fixed indents", startMark);
+			console.dir(performance.getEntriesByType("measure"));
+		}
+		
+		window.addEventListener("DOMContentLoaded", fixIndents);
+	</script>
+</head>
+<body>
+	<h1>Mandelbrot Implementation in Erlang</h1>
+	<span class="authors">Hannah Levy, Trevor Kerr, Josh Dorsey</span>
+	<hr>
+	<h2>The Procedure <a name="procedure" href="#procedure">&sect;</a></h2>
+	<p>
+		Our implementation uses a pretty typical mandelbrot set procedure.
+		The idea of the algorithm is to figure out whether the following series
+		converges or not:
+		<p class="formula">
+			x<sub>0</sub> = c<br>
+			x<sub>n</sub> = x<sub>n-1</sub><sup>2</sup> + c
+		</p>
+	</p>
+	<p>
+		Evaluation of the series continues until it converges (that is to say until
+		<span class="formula">
+			x<sub>n</sub> - x<sub>n-1</sub>
+		</span>
+		is less than some threshold).  The image is created by choosing
+		<span class="formula">c</span> to be a point in the complex plane, and then
+		testing how many iterations are required until the value converges.  The idea
+		is to choose upper and lower bounds in the complex plane, a width and
+		height for the image and do this procedure for each point.  Then, using the
+		number of iterations each point took to converge (or diverge) we can color
+		the image.
+	</p>
+	<h2>The Implementation <a name="implementation" href="#implementation">&sect;</a></h2>
+	<p>
+		Although there are functional programming tools (like
+		<a href="http://erlang.org/doc/man/lists.html#foreach-2">lists:foreach</a> and
+		<a href="http://erlang.org/doc/man/lists.html#map-2">lists:map</a>), in general
+		iteration in Erlang is done via tail-call recursion, so in our program we generate
+		a list of evenly-spaced numbers between the complex bounds for each row (similar to
+		numpy's
+		<a href="https://docs.scipy.org/doc/numpy/reference/generated/numpy.linspace.html">linspace</a> function).
+		In practice our we build each row of values like this:
+		<pre class="fix-indent"><code class="erlang">
+			%% @doc Calculates a row of the set
+			create_set_row([], _, _, List) ->
+				List;
+			create_set_row([Current | Rest], Test, MaxIter, List) ->
+				Elem = calc(&hellip;),
+				create_set_row(Rest, Test, MaxIter, [Elem | List]).
+		</code></pre>
+	<span class="code-label">see <a href="resources/mb.erl">mb.erl</a>, line 43</span>
+	</p>
+	<p>
+		The first clause in this function is the base case, which simply returns the list
+		that has the values for this row in it.  Otherwise, we grab the first element from
+		<code class="erlang">[Current | Rest]</code>, using it and our value for
+		<code class="erlang">Test</code> to calculate perform the convergence
+		test on this point.  We then recurse, passing the <code class="erlang">Rest</code>
+		of the points in this row on to the recursive call, as well as appending
+		<code class="erlang">Elem</code> to the result list.
+	</p>
+	<p>
+		The test for whether the series converges or not (the calc function in
+		<code class="erlang">create_set_row/4</code> shown above), is a similar recursive
+		function.
+		<pre class="fix-indent"><code class="erlang">
+			%% @doc Checks if (and how fast) the series diverges
+			mandelbrot_calc(_, _, 0, _, _, _) ->
+				0;
+			mandelbrot_calc(Real, Imaginary, Maxiter, Index, InitR, InitC) when Maxiter > 0 ->
+				Mag = math:sqrt(Real * Real + Imaginary * Imaginary), 
+				if 
+					Mag >= 2 ->
+						Index;
+					Mag < 4 ->
+						NewR = Real * Real - Imaginary * Imaginary + InitR,
+						NewI = 2 * Real * Imaginary + InitC,
+						mandelbrot_calc(NewR, NewI, Maxiter - 1, Index + 1, InitR, InitC)
+				end.
+		</code></pre>
+		<span class="code-label">see <a href="resources/mb.erl">mb.erl</a>, line 22</span>
+		As there is no datatype for complex numbers in Erlang, and this use case didn't seem
+		to justify writing a quick module to define the basic operations on complex numbers,
+		the calculations are written out in full.
+	</p>
+	<h2>The Results <a name="results" href="#results">&sect;</a></h2>
+	<p>
+		Without any kind of complicated post-processing, there aren't many options for
+		applying colors to the picture other than assigning a color for each value from
+		the Mandelbrot calculation.  We tried a couple of different approaches for this
+		color mapping function, one of which is shown below:
+		<pre class="fix-indent"><code class="erlang">
+			color_mapper(Val) when is_integer(Val) ->
+				hsv_color(mod(Val * 5 + 190, 360), 0.8, 0.9).
+		</code></pre>
+		<span class="code-label">see <a href="resources/draw_mb.erl">draw_mb.erl</a>, line 119</span>
+		It uses a separately-defined function <code class="erlang">hsv_color/3</code> to calculate
+		a one-to-one mapping of Mandelbrot value to hue.  This allows us to mess around
+		with the spacing of the hue values, which leads to a larger range of colors in
+		the final image.  This function is what results in the relatively normal images below
+		(the first two and the last one).
+	</p>
+	<a href="img/mb_32495.png" data-lightbox="mb-set">
+		<img src="img/thumb/mb_32495.png" width="320"/>
+	</a>
+	<a href="img/mb_30527.png" data-lightbox="mb-set">
+		<img src="img/thumb/mb_30527.png" width="320"/>
+	</a>
+	<p>
+		Something else we tried was simply squaring
+		<code class="erlang">Val</code>, which resulted in the striped patterns in the other
+		images.  We also found that higher powers resulted in different color schemes, a
+		couple of which are shown below.
+	</p>
+	<a href="img/mb_31101.png" data-lightbox="mb-set">
+		<img src="img/thumb/mb_31101.png" width="320"/>
+	</a>
+	<a href="img/mb_31562.png" data-lightbox="mb-set">
+		<img src="img/thumb/mb_31562.png" width="320"/>
+	</a>
+	<p>
+		One last thing to note about the rendering process is the actual image creation.  We used
+		<a href="http://erlang.org/documentation/doc-7.2/lib/percept-0.8.11/doc/html/egd.html">egd</a>,
+		which is a library normally bundled with a different Erlang library, and is used to
+		build graphs dynamically for a profiling tool called
+		<a href="http://erlang.org/documentation/doc-7.0/lib/percept-0.8.11/doc/html/percept.html">percept</a>.
+		Beause of the fact that it's really designed to draw solid lines and simple shapes,
+		the design is really suboptimal for our purposes, and drawing the image is by far
+		the least efficient piece of our program.  This could also be due to the way
+		<code class="erlang">build_image/4</code> is defined (shown below).
+		<pre class="fix-indent"><code class="erlang">
+			%% @doc Base case for a row
+			build_image(_, [], 0, _) ->
+				ok;
+			%% @doc Base case for a column
+			build_image(_, [], _, 0) ->
+				ok;
+			%% @doc Finished drawing
+			build_image(Img, [], 0, 0) ->
+				Img;
+			%% @doc Run for each row
+			build_image(Img, [First | Rest], X, Y) when is_list(First) ->
+				build_image(Img, First, X, Y),
+				build_image(Img, Rest, X, Y-1);
+			%% @doc Run for each column
+			build_image(Img, [First | Rest], X, Y) when is_integer(First) ->
+				egd:line(Img, {X, Y}, {X-1, Y-1}, color_mapper(First)),
+				build_image(Img, Rest, X-1, Y).
+		</code></pre>
+		<span class="code-label">see <a href="resources/draw_mb.erl">draw_mb.erl</a>, line 57</span>
+		This function was more of a case study of what the language allows you to do than something
+		designed to be efficient.  However,
+		<a href="http://erlang.org/documentation/doc-7.2/lib/percept-0.8.11/doc/html/egd.html">egd</a>
+		creates a process for each image, and the drawing functions
+		<a href="https://github.com/erlang/egd/blob/1cea959544de7dd40a3284ba571a58939de57616/src/egd.erl#L222">
+			accumulate a set of shapes on the call stack for the process's main loop
+		</a>
+		, and since we're coloring every pixel this uses a ton of memory.  Fortunately
+		it's relatively trivial to divide the work up among multiple pictures, as shown
+		below:
+		<pre class="fix-indent"><code class="erlang">
+			run(W, H) ->
+				BottomX = -0.745458,
+				TopX = -0.745398,
+				Middle1X = BottomX + ((TopX - BottomX) / 3),
+				Middle2X = BottomX + (((TopX - BottomX) * 2) / 3),
+				
+				BottomY = 0.112979,
+				TopY = 0.113039,
+				Middle1Y = BottomY + ((TopY - BottomY) / 3),
+				Middle2Y = BottomY + (((TopY - BottomY) * 2) / 3),
+				
+				run_bounds(BottomX, Middle1X, BottomY, Middle1Y, W, H, "1_1"),
+				run_bounds(Middle1X, Middle2X, BottomY, Middle1Y, W, H, "2_1"),
+				run_bounds(Middle2X, TopX, BottomY, Middle1Y, W, H, "3_1"),
+				
+				run_bounds(BottomX, Middle1X, Middle1Y, Middle2Y, W, H, "1_2"),
+				run_bounds(Middle1X, Middle2X, Middle1Y, Middle2Y, W, H, "2_2"),
+				run_bounds(Middle2X, TopX, Middle1Y, Middle2Y, W, H, "3_2"),
+				
+				run_bounds(BottomX, Middle1X, Middle2Y, TopY, W, H, "1_3"),
+				run_bounds(Middle1X, Middle2X, Middle2Y, TopY, W, H, "2_3"),
+				run_bounds(Middle2X, TopX, Middle2Y, TopY, W, H, "3_3").
+		</code></pre>
+		<span class="code-label">see <a href="resources/draw_mb.erl">draw_mb.erl</a>, line 20</span>
+		
+		This also allowed us to render at very large resolutions and then downscale
+		to improve the awful aliasing that's inherent to the detailed parts of images
+		like this.  It's not always a perfect integer downscale, but the edges in our
+		result images are significantly softer than they started.
+	</p>
+	<a href="img/mb_30345.png" data-lightbox="mb-set">
+		<img src="img/thumb/mb_30345.png" width="320"/>
+	</a>
+	<a href="img/mb_32768.png" data-lightbox="mb-set">
+		<img src="img/thumb/mb_32768.png" width="320"/>
+	</a>
+</body>
+</html>

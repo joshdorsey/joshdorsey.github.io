@@ -1,0 +1,121 @@
+/* Basic HTML Styles */
+body {
+	width: 700px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 80px 30px;
+	font-family: 'Georgia', serif;
+}
+
+h1 {
+	text-align: center;
+	margin-bottom: 5px;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+h2 {
+	margin-top: 30px;
+	margin-left: -3px;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+h2 > a:link, h2 > a:visited {
+	color: #ddd;
+	text-decoration: none;
+}
+
+h2 > a:hover, a:active {
+	color: #444;
+}
+
+h2 > a:focus {
+	color: #fff;
+}
+
+hr {
+	width: 300px;
+	height: 3px;
+	border: none;
+	border-radius: 1.5px;
+	background-color: #ddd;
+}
+
+a:link, a:visited {
+	color: #04adef;
+	text-decoration: none;
+}
+
+a:active {
+	color: #71d7ff;
+	border: none;
+}
+
+a:hover {
+	color: #23c1ff;
+	text-decoration: underline;
+}
+
+a:focus {
+	outline: none;
+	color: #fff;
+	background-color: #04adef;
+}
+
+p {
+	margin: 5px auto;
+}
+
+.authors {
+	display: block;
+	text-align: center;
+	margin-bottom: 20px;
+	font-style: italic;
+}
+
+/* Formulas */
+.formula {
+	font-family: 'Cambria';
+}
+
+p.formula {
+	margin: 15px auto;
+	text-indent: 0;
+	text-align: center;
+	font-size: 14pt;
+}
+
+/* Highlight.js Code Blocks */
+span.code-label {
+	display: block;
+	line-height: 135%;
+	text-align: right;
+	padding-right: 0.5em;
+	margin-bottom: 5px;
+	font-size: 11pt;
+}
+
+pre {
+	margin-bottom: 0;
+}
+
+pre code {
+	margin-right: 0.5em;
+	margin-bottom: 0;
+}
+
+/* as per https://stackoverflow.com/a/32868985 */
+p > code.hljs {
+	display: inline;
+}
+
+/* Lightbox stuff */
+a[data-lightbox] {
+	display: inline-block;
+}
+
+a[data-lightbox] > img {
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
