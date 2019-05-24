@@ -119,3 +119,7 @@ a[data-lightbox] > img {
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
+
+.lb-data .lb-close {
+	display: none;
+}
