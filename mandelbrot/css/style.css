@@ -121,5 +121,5 @@ a[data-lightbox] > img {
 }
 
 .lb-data .lb-close {
-	display: none;
+	display: none !important;
 }
