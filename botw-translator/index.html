@@ -1,0 +1,94 @@
+<!doctype html5>
+<html>
+	<head>
+		<title>BOTW Translator</title>
+		<meta charset="utf-8"/>
+		<style>
+		body {
+			background: #ccc;
+		}
+		
+		.glyph.space {
+			display: inline-block;
+			/*background: #bbb;*/
+		}
+		
+		.glyph {
+			width: 20px;
+			height: 20px;
+		}
+		</style>
+		<script type="text/javascript">
+			let imageMap = {};
+			"abcdefghijklmnopqrstuvwxyz".split("").forEach(letter => {
+				imageMap[letter] = new Image();
+				imageMap[letter].src = "glyphs/"+letter+".svg";
+				imageMap[letter].dataset.letter = letter;
+				imageMap[letter].classList.add("glyph");
+			});
+			let glyphArray, entryField, renderField;
+			
+			function buildGlyph(letter) {
+				letter = letter.toLocaleLowerCase();
+				let template = imageMap[letter];
+				let element;
+				if(template !== undefined) {
+					element = template.cloneNode();
+				} else {
+					if(letter === '\n') {
+						element = document.createElement("br");
+						element.classList.add("glyph");
+						element.classList.add("newline");
+					} else {
+						element = document.createElement("div");
+						element.classList.add("glyph");
+						element.classList.add("space");
+						element.textContent = letter;
+					}
+				}
+				return element;
+			}
+			
+			function textAreaListener() {
+				let value = entryField.value;
+				
+				let minReplace = Math.min(glyphArray.length, value.length);
+				for(let i = 0; i < minReplace; i++) {
+					let letter = value[i];
+					if(glyphArray[i].dataset.letter !== letter) {
+						let oldElement = glyphArray[i];
+						let newElement = buildGlyph(letter);
+						delete renderField.replaceChild(newElement, oldElement);
+						glyphArray[i] = newElement;
+					}
+				}
+				
+				if(glyphArray.length <= value.length) {
+					while(glyphArray.length < value.length) {
+						let letter = value[glyphArray.length];
+						let element = buildGlyph(letter);
+						glyphArray.push(element);
+						renderField.appendChild(element);
+					}
+				} else {
+					for(let i = value.length; i < glyphArray.length; i++) {
+						delete renderField.removeChild(glyphArray[i]);
+					}
+					glyphArray.length = value.length;
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<textarea id="text-entry" cols=60></textarea>
+		<div id="text-render"></div>
+		<script type="text/javascript">
+			entryField = document.getElementById("text-entry");
+			renderField = document.getElementById("text-render");
+			
+			entryField.oninput = textAreaListener;
+			glyphArray = [];
+			textAreaListener();
+		</script>
+	</body>
+</html>
