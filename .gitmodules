@@ -1,21 +1,21 @@
 [submodule "4d-tic-tac-toe"]
 	path = 4d-tic-tac-toe
-	url = https://github.com/thestandardtoaster/4d-tic-tac-toe
+	url = https://github.com/joshdorsey/4d-tic-tac-toe
 [submodule "parallax"]
 	path = parallax
-	url = https://github.com/thestandardtoaster/parallax
+	url = https://github.com/joshdorsey/parallax
 [submodule "conway"]
 	path = conway
-	url = https://github.com/thestandardtoaster/conway.git
+	url = https://github.com/joshdorsey/conway.git
 [submodule "spirograph"]
 	path = spirograph
-	url = https://github.com/thestandardtoaster/spirograph
+	url = https://github.com/joshdorsey/spirograph
 [submodule "p5SoundVisualizer"]
 	path = p5SoundVisualizer
-	url = https://github.com/thestandardtoaster/p5SoundVisualizer
+	url = https://github.com/joshdorsey/p5SoundVisualizer
 [submodule "soundVisualizer"]
 	path = soundVisualizer
-	url = https://github.com/thestandardtoaster/soundVisualizer
+	url = https://github.com/joshdorsey/soundVisualizer
 [submodule "squarefield"]
 	path = squarefield
-	url = https://github.com/thestandardtoaster/squarefield.git
+	url = https://github.com/joshdorsey/squarefield.git
